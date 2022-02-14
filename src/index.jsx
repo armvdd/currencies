@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import Rate from './components/Rate';
 import './style.css';
 
 const App = () => {
   const [currency, setCurrency] = useState('USD');
+  const [kurz, setKurz] = useState("");
+
+  useEffect(() => {
+    fetch(`https://api.frankfurter.app/latest?from=${currency}&to=CZK`)
+    .then(response => response.json())
+    .then(data => {setKurz(data.rates.CZK)})
+  }, [currency]
+  )
 
   const handleCurrencyChange = (e) => {
     setCurrency(e.target.value);
@@ -28,7 +36,7 @@ const App = () => {
             </select>
           </div>
         </form>
-        <Rate />
+        <Rate from={currency} rateValue={kurz}/>
       </div>
     </div>
   );

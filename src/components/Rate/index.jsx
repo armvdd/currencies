@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.css';
 
-const Rate = () => {
+const Rate = ({from, rateValue}) => {
   return (
     <div className="rate">
-      <div className="rate__currency">1 USD</div>
+      <div className="rate__currency" value={from}>1 {from}</div>
       <div>=</div>
-      <div className="rate__value">22 CZK</div>
+      <div className="rate__value">{rateValue} CZK</div>
     </div>
   );
 };
